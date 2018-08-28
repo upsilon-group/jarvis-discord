@@ -29,5 +29,5 @@
     },
     "server_name": "SERVER NAME HERE",
     "token": "BOT TOKEN HERE",
-    "word_blacklist_fp": ""
+    "word_blacklist_fp": "blacklist.txt"
 }
