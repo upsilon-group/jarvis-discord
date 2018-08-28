@@ -56,6 +56,7 @@ BOT = commands.Bot(
 
 @BOT.event
 async def on_ready() -> None:
+    CONFIG.guild(BOT)
     LOGGER.info(f"Logged in as : {str(BOT.user)}, ID: {BOT.user.id}")
     utils.load_base_cogs(BOT)
 
