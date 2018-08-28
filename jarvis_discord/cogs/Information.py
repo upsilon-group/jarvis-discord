@@ -31,7 +31,7 @@ class Information:
             ctx.author,
             "Informations :",
             user.color.value,
-            f"Joue à __***{user.game.name}***__" if user.game else None,
+            f"Joue à __***{user.activity.name}***__" if user.activity else None,
             datetime.datetime.now(),
             None,
             user.avatar_url,
