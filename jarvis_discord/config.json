@@ -1,0 +1,33 @@
+{
+    "allow_dm": true,
+    "allow_mentioned": true,
+    "api": {
+        "brawlhalla": {
+            "image_url": "images/",
+            "token": "BRAWLHALLA TOKEN HERE"
+        }
+    },
+    "caps_max_percentage": 40,
+    "caps_min_length": 4,
+    "channels": {
+        "command": [
+            ""
+        ],
+        "ignored": [
+            ""
+        ],
+        "report": ""
+    },
+    "default_cogs": [
+        "botutils.py"
+    ],
+    "default_role": "",
+    "prefix": [
+        ""
+    ],
+    "role": {
+    },
+    "server_name": "SERVER NAME HERE",
+    "token": "BOT TOKEN HERE",
+    "word_blacklist_fp": ""
+}
