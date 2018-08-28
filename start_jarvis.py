@@ -119,10 +119,13 @@ async def on_raw_message_edit(message_id: int, datas: Optional[Dict] = None) -> 
 
 @BOT.event
 async def on_message(message: discord.Message) -> None:
+    channels_cmd = CONFIG.channels_cmd()
     LOGGER.info(
         f"{message.id} : in {str(message.channel.recipient) if isinstance(message.channel, discord.abc.PrivateChannel) else message.channel.name}"
     )
     LOGGER.info(f"↪ message: {str(message.author)}: {message.content}")
+    if message.channel in channels_cmd:
+        message.delete()
     await BOT.process_commands(message)
 
 
