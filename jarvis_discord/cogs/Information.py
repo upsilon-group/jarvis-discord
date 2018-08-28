@@ -26,7 +26,7 @@ class Information:
     @info.command(aliases=["usr"])
     async def user(self, ctx, *, user: discord.Member = None) -> None:
         if not user:
-            user = ctx.author
+            user = self.server.get_member(ctx.author.id)
         await utils.embed_msg(
             ctx.author,
             "Informations :",
