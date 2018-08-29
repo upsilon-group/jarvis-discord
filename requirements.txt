@@ -1,2 +1,2 @@
-discord.py==1.0.0a1510+g8ccb98d
-requests==2.19.1
+discord.py>=1.0.0a1510+g8ccb98d
+requests>=2.19.1
