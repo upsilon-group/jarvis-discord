@@ -126,7 +126,7 @@ async def on_message(message: discord.Message) -> None:
     )
     LOGGER.info(f"↪ message: {str(message.author)}: {message.content}")
     if message.channel in channels_cmd:
-        message.delete()
+        await message.delete()
     await BOT.process_commands(message)
 
 
