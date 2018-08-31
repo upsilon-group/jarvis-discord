@@ -1,11 +1,10 @@
 import datetime
-import discord
 import logging
-
-from discord.ext import commands
-from jarvis_discord import config
-from jarvis_discord import utils
 from typing import Union
+
+import discord
+from discord.ext import commands
+from jarvis_discord import config, utils
 
 LOGGER = logging.getLogger(f"jarvis.{__name__}")
 
@@ -15,7 +14,7 @@ class Say:
         self.bot = bot
         self.config = config.Config("jarvis_discord/config.json")
         self.server = self.config.guild(bot)
-    
+
     @commands.command()
     async def say(self, ctx, channel: discord.TextChannel, *, message: str) -> None:
         LOGGER.info(message)
@@ -27,6 +26,7 @@ class Say:
         LOGGER.error(error)
         if isinstance(error, commands.BadArgument):
             await utils.self_delete(ctx, f"{' '.join(ctx.args)} est introuvable.")
+
 
 def setup(bot):
     bot.add_cog(Say(bot))

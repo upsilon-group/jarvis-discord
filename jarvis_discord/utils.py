@@ -8,16 +8,11 @@ import asyncio
 import datetime
 import logging
 import os
-
-from typing import Dict
-from typing import Optional
+from typing import Dict, Optional
 
 import discord
-
 from discord.ext import commands
-
 from jarvis_discord import config
-
 
 LOGGER = logging.getLogger(f"jarvis.{__name__}")
 

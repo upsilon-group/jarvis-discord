@@ -1,12 +1,9 @@
 import json
 import logging
 import sys
-
-from typing import List
-from typing import Optional
+from typing import List, Optional
 
 import discord
-
 from jarvis_discord import exception
 
 LOGGER = logging.getLogger(f"jarvis.{__name__}")

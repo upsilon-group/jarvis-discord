@@ -7,18 +7,12 @@ import asyncio
 import locale
 import logging
 import os
-
-from typing import Dict
-from typing import Optional
+from typing import Dict, Optional
 
 import discord
-
-from discord.ext import commands
-
 import requests
-
-from jarvis_discord import config
-from jarvis_discord import utils
+from discord.ext import commands
+from jarvis_discord import config, utils
 
 locale.setlocale(locale.LC_TIME, "")
 
@@ -28,7 +22,9 @@ DISCORD_HANDLER = logging.FileHandler(
     filename="logs/discord.log", encoding="utf-8", mode="w+"
 )
 DISCORD_HANDLER.setFormatter(
-    logging.Formatter("%(asctime)s [%(levelname)s] <%(name)s> - [%(funcName)s] - %(message)s", "%x %X")
+    logging.Formatter(
+        "%(asctime)s [%(levelname)s] <%(name)s> - [%(funcName)s] - %(message)s", "%x %X"
+    )
 )
 DISCORD_LOGGER.addHandler(DISCORD_HANDLER)
 
