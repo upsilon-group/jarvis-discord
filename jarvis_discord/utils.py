@@ -21,42 +21,6 @@ PREFIX = CONFIG.prefix()
 BASE_COGS = CONFIG.base_cogs()
 
 
-async def rainbow(bot) -> None:
-    await bot.wait_until_ready()
-    guild = CONFIG.guild(bot)
-    rainbow_role = discord.utils.get(guild.roles, name="rainbow")
-    colors = [
-        discord.Colour(int("FF0000", 16)),
-        discord.Colour(int("FF003F", 16)),
-        discord.Colour(int("FF007F", 16)),
-        discord.Colour(int("FF00BF", 16)),
-        discord.Colour(int("FF00FF", 16)),
-        discord.Colour(int("BF00FF", 16)),
-        discord.Colour(int("7F00FF", 16)),
-        discord.Colour(int("3F00FF", 16)),
-        discord.Colour(int("0000FF", 16)),
-        discord.Colour(int("003FFF", 16)),
-        discord.Colour(int("007FFF", 16)),
-        discord.Colour(int("00BFFF", 16)),
-        discord.Colour(int("00FFFF", 16)),
-        discord.Colour(int("00FFBF", 16)),
-        discord.Colour(int("00FF7F", 16)),
-        discord.Colour(int("00FF3F", 16)),
-        discord.Colour(int("00FF00", 16)),
-        discord.Colour(int("3FFF00", 16)),
-        discord.Colour(int("7FFF00", 16)),
-        discord.Colour(int("BFFF00", 16)),
-        discord.Colour(int("FFFF00", 16)),
-        discord.Colour(int("FFBF00", 16)),
-        discord.Colour(int("FF7F00", 16)),
-        discord.Colour(int("FF3F00", 16)),
-    ]
-    while not bot.is_closed():
-        for color in colors:
-            await rainbow_role.edit(color=color)
-            await asyncio.sleep(0.3)
-
-
 async def self_delete(channel: discord.abc.Messageable, *args: str) -> None:
     for arg in args:
         await channel.send(content=arg, delete_after=4)

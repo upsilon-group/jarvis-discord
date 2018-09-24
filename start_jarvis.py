@@ -54,6 +54,7 @@ BOT = commands.Bot(
 async def on_ready() -> None:
     CONFIG.guild(BOT)
     LOGGER.info(f"Logged in as : {str(BOT.user)}, ID: {BOT.user.id}")
+    LOOP.create_task(jarvis_discord.cogs.Rainbow.rainbow_loop())
     utils.load_base_cogs(BOT)
 
 
@@ -127,7 +128,6 @@ async def on_message(message: discord.Message) -> None:
 
 
 LOOP = asyncio.get_event_loop()
-LOOP.create_task(utils.rainbow(BOT))
 
 try:
     try:
