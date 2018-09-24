@@ -1,5 +1,7 @@
 import datetime
 import logging
+import re
+from typing import List
 
 import discord
 from discord.ext import commands
@@ -12,17 +14,21 @@ class Moderation:
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    def blacklist_check(self, message: discord.Message) -> bool:
-        with open("jarvis_discord/blacklist.txt", "r") as blacklist_file:
-            blacklist_text = blacklist_file.read()
-        blacklist = blacklist_text.splitlines()
-        for stop_word in blacklist:
-            if message.content.find(stop_word) is not -1:
+    def check_message(self, list: List[str], message: discord.Message) -> bool:
+        for stop_word in list:
+            if stop_word in message.content.split():
                 return True
         return False
 
+    def blacklist(self, message: discord.Message) -> bool:
+        with open("jarvis_discord/blacklist.txt", "r") as blacklist_file:
+            blacklist_text = blacklist_file.read()
+        blacklist = blacklist_text.splitlines()
+        result = self.check_message(blacklist, message)
+        return result
+
     async def blacklisted_message(self, message: discord.Message) -> None:
-        if self.blacklist_check(message):
+        if self.blacklist(message):
             if not isinstance(message.channel, discord.abc.PrivateChannel):
                 await message.delete()
                 await utils.self_delete(
