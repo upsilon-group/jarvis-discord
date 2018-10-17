@@ -23,7 +23,6 @@ class Random:
                 pass
             finally:
                 values.append(value)
-        print(values)
         if any(isinstance(value, str) for value in values):
             response = random.choice(values)
         elif any(isinstance(value, float) for value in values):
