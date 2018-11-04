@@ -5,14 +5,17 @@ from typing import List
 
 import discord
 from discord.ext import commands
-from jarvis_discord import utils
+from jarvis_discord import config, utils
 
 LOGGER = logging.getLogger(f"jarvis.{__name__}")
+CONFIG = config.Config("jarvis_discord/config.json")
 
 
 class Moderation:
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
+        guild = CONFIG.guild(self.bot)
+        self.channels_ignored = CONFIG.channels_ignored()
 
     def check_message(self, list: List[str], message: discord.Message) -> bool:
         for stop_word in list:
@@ -29,11 +32,12 @@ class Moderation:
 
     async def blacklisted_message(self, message: discord.Message) -> None:
         if self.blacklist(message):
-            if not isinstance(message.channel, discord.abc.PrivateChannel):
+            if (
+                isinstance(message.channel, discord.abc.GuildChannel)
+                and message.channel not in self.channels_ignored
+            ):
                 await message.delete()
-                await utils.self_delete(
-                    message.channel, ":x: respecte les autres pour être respecté"
-                )
+                await utils.self_delete(message.channel, ":x: parle autrement.")
 
 
 def setup(bot: commands.Bot) -> None:
