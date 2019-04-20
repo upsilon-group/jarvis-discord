@@ -1,5 +1,5 @@
 {
-    "allow_dm": true,
+    "allow_pm": true,
     "allow_mentioned": true,
     "api": {
         "brawlhalla": {
@@ -10,24 +10,26 @@
     "caps_max_percentage": 40,
     "caps_min_length": 4,
     "channels": {
-        "command": [
-            ""
-        ],
-        "ignored": [
-            ""
-        ],
+        "command": [],
+        "ignored": [],
         "report": ""
     },
     "default_cogs": [
-        "botutils.py"
+        "jarvis.py"
     ],
     "default_role": "",
-    "prefix": [
-        ""
-    ],
-    "role": {
+    "guild_id": 141242013537271808,
+    "prefix": [],
+    "role_permission": {
+        "commands": {
+            "bot.disable": [],
+            "bot.enable": [],
+            "bot.message": [],
+            "extention": []
+        },
+        "give_role": {}
     },
     "server_name": "SERVER NAME HERE",
     "token": "BOT TOKEN HERE",
-    "word_blacklist_fp": "blacklist.txt"
+    "blacklist": "blacklist.txt"
 }
