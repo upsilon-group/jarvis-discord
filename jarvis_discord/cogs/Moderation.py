@@ -1,36 +1,48 @@
-import datetime
+"""Jarvis Discord BOT.
+
+AUTHOR : Luoskate
+VERSION : 1.1
+"""
 import logging
-import re
-from typing import List
+from typing import List, Optional
 
 import discord
 from discord.ext import commands
 from jarvis_discord import config, utils
 
 LOGGER = logging.getLogger(f"jarvis.{__name__}")
-CONFIG = config.Config("jarvis_discord/config.json")
+CONFIG = config.Config()
 
 
-class Moderation:
+class Moderation(commands.Cog):
+    # TODO: add doc
     def __init__(self, bot: commands.Bot) -> None:
-        self.bot = bot
-        guild = CONFIG.guild(self.bot)
-        self.channels_ignored = CONFIG.channels_ignored()
+        with open("jarvis_discord/blacklist.txt", "r") as blacklist_file:
+            self.blacklist_text = blacklist_file.read()
 
-    def check_message(self, list: List[str], message: discord.Message) -> bool:
-        for stop_word in list:
+        self.channels_ignored: List[Optional[discord.TextChannel]] = []
+        for channel_ignored in CONFIG.config["channels"]["command"]:
+            channel_ignored = discord.utils.get(
+                bot.get_all_channels(), name=channel_ignored
+            )
+            if isinstance(channel_ignored, discord.TextChannel):
+                self.channels_ignored.append(channel_ignored)
+
+    def check_message(self, blacklist: List[str], message: discord.Message) -> bool:
+        # TODO: add doc
+        for stop_word in blacklist:
             if stop_word in message.content.split():
                 return True
         return False
 
     def blacklist(self, message: discord.Message) -> bool:
-        with open("jarvis_discord/blacklist.txt", "r") as blacklist_file:
-            blacklist_text = blacklist_file.read()
-        blacklist = blacklist_text.splitlines()
+        # TODO: add doc
+        blacklist = self.blacklist_text.splitlines()
         result = self.check_message(blacklist, message)
         return result
 
     async def blacklisted_message(self, message: discord.Message) -> None:
+        # TODO: add doc
         if self.blacklist(message):
             if (
                 isinstance(message.channel, discord.abc.GuildChannel)
@@ -41,6 +53,7 @@ class Moderation:
 
 
 def setup(bot: commands.Bot) -> None:
+    # TODO: add doc
     moderation = Moderation(bot)
     bot.add_listener(moderation.blacklisted_message, "on_message")
     bot.add_cog(moderation)

@@ -1,2 +1,0 @@
-class NoPrefix(Exception):
-    pass
