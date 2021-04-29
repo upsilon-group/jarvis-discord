@@ -1,0 +1,17 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: weekly
+  open-pull-requests-limit: 10
+  reviewers:
+  - Luoskate
+  assignees:
+  - Luoskate
+  labels:
+  - dependencies
+  ignore:
+  - dependency-name: discord-py
+    versions:
+    - 1.7.0
